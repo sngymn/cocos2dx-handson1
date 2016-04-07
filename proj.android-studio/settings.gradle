@@ -1,0 +1,8 @@
+include ':libcocos2dx'
+project(':libcocos2dx').projectDir = new File(settingsDir, '../cocos2d/cocos/platform/android/libcocos2dx')
+include ':Pelmanism'
+project(':Pelmanism').projectDir = new File(settingsDir, 'app')
+include ':Classes'
+project(':Classes').projectDir = new File(settingsDir, '../Classes')
+include ':Resources'
+project(':Resources').projectDir = new File(settingsDir, '../Resources')
