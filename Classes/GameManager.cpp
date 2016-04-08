@@ -27,6 +27,25 @@ bool GameManager::init() {
       
     auto loc = touch->getLocation();
 
+    switch (gameState) {
+            // 1枚目のカードを選択
+        case GameState::OpenFirstCard:
+            /* 処理 */
+            break;
+            // 2枚目のカードを選択
+        case GameState::OpenSecondCard:
+            /* 処理 */
+            break;
+            // カードのペアチェック
+        case GameState::CheckPair:
+            /* 処理 */
+            break;
+            // ゲームをリセットする
+        case GameState::ResetGame:
+            /* 処理 */
+            break;
+    }
+      
     return true;
   };
 
