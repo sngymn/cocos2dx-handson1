@@ -30,19 +30,68 @@ bool GameManager::init() {
     switch (gameState) {
             // 1枚目のカードを選択
         case GameState::OpenFirstCard:
-            /* 処理 */
+            for (int i = 0; i < cards.size(); i++) {
+                // カードがクローズしているかつタッチポイントがカード内に存在する場合
+                if (!cards.at(i)->isOpen() && cards.at(i)->inside(loc)) {
+                    cards.at(i)->open();
+                    selectedFirstCardIndex = i;
+                    gameState = GameState::OpenSecondCard;
+                    break;
+                };
+            }
             break;
             // 2枚目のカードを選択
         case GameState::OpenSecondCard:
-            /* 処理 */
+            for (int i = 0; i < cards.size(); i++) {
+                // カードがクローズしているかつタッチポイントがカード内に存在する場合
+                if (!cards.at(i)->isOpen() && cards.at(i)->inside(loc)) {
+                    cards.at(i)->open();
+                    selectedSecondCardIndex = i;
+                    gameState = GameState::CheckPair;
+                    break;
+                };
+            }
             break;
             // カードのペアチェック
         case GameState::CheckPair:
-            /* 処理 */
+            if (cards.at(selectedFirstCardIndex)->getCardNumber() == cards.at(selectedSecondCardIndex)->getCardNumber()) {
+                
+                cards.at(selectedFirstCardIndex)->invisible();
+                cards.at(selectedSecondCardIndex)->invisible();
+                
+                // 残りのペア数を減らす
+                remainingNumberOfPairs--;
+            }
+            // ペアが成立しなかった場合
+            else {
+                cards.at(selectedFirstCardIndex)->close();
+                cards.at(selectedSecondCardIndex)->close();
+            }
+            
+            // 残りのペアが無くなった場合、ゲームをリセットする
+            if (remainingNumberOfPairs == 0) {
+                gameState = GameState::ResetGame;
+            }
+            else {
+                gameState = GameState::OpenFirstCard;
+            }
+            
             break;
             // ゲームをリセットする
         case GameState::ResetGame:
-            /* 処理 */
+            remainingNumberOfPairs = MAX_CARD_NUMBER;
+            
+            // カードの状態をリセットする
+            for (auto& card : cards) {
+                card->visible();
+                card->close();
+            }
+            
+            // カードの再配置
+            arrangeCards();
+            
+            // 新しいゲームを開始する
+            gameState = GameState::OpenFirstCard;
             break;
     }
       
