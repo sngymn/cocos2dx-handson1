@@ -1,6 +1,7 @@
 #ifndef __GAMEMANAGER_H__
 #define __GAMEMANAGER_H__
 
+#include "Card.h"
 #include "cocos2d.h"
 
 class GameManager : public cocos2d::Layer {
@@ -21,7 +22,7 @@ public:
 
 private:
   // 動的配列を宣言する
-  cocos2d::Vector<cocos2d::Sprite *> cards{};
+  cocos2d::Vector<Card *> cards{};
 };
 
 #endif // __HELLOWORLD_SCENE_H__

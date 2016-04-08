@@ -40,7 +40,8 @@ void GameManager::loadCards() {
   for (int i = 1; i <= MAX_CARD_NUMBER; i++) {
 
     // ハート柄のカードをロードする
-    auto heart = Sprite::create(StringUtils::format("h%d.png", i));
+    auto heart =
+        Card::create(i, StringUtils::format("h%d.png", i), "back_red.png");
     heart->setAnchorPoint(Vec2::ANCHOR_BOTTOM_LEFT);
     addChild(heart);
 
@@ -48,7 +49,8 @@ void GameManager::loadCards() {
     cards.pushBack(heart);
 
     // ダイヤ柄のカードをロードする
-    auto diamond = Sprite::create(StringUtils::format("d%d.png", i));
+    auto diamond =
+        Card::create(i, StringUtils::format("d%d.png", i), "back_red.png");
     diamond->setAnchorPoint(Vec2::ANCHOR_BOTTOM_LEFT);
     addChild(diamond);
 
