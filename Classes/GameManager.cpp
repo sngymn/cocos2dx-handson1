@@ -16,6 +16,7 @@ bool GameManager::init() {
   }
 
   loadCards();
+  arrangeCards();
 
   // Touchアクションのイベントリスナー
   auto listener = EventListenerTouchOneByOne::create();
@@ -60,4 +61,23 @@ void GameManager::loadCards() {
 }
 
 // カードを配置する関数
-void GameManager::arrangeCards() {}
+void GameManager::arrangeCards() {
+  const Size windowSize = Director::getInstance()->getWinSize();
+  const Size cardSize = cards.back()->getCardSize(); // カードサイズは全て同じ
+  const Size margin((windowSize.width - cardSize.width * MAX_CARD_ROWS) / (MAX_CARD_ROWS + 1),
+                    (windowSize.height - cardSize.height * MAX_CARD_COLS) / (MAX_CARD_COLS + 1));
+
+  int row = 0;
+  int col = 0;
+
+  for (auto &card : cards) {
+    card->setPosition((cardSize.width + margin.width) * row + margin.width,
+                      (cardSize.height + margin.height) * col + margin.height);
+
+    row++;
+    if (row % MAX_CARD_ROWS == 0) {
+      row = 0;
+      col++;
+    }
+  }
+}
