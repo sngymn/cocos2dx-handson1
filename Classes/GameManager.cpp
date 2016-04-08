@@ -2,43 +2,54 @@
 
 USING_NS_CC;
 
-Scene* GameManager::createScene()
-{
-    auto scene = Scene::create();
-    auto layer = GameManager::create();
-    scene->addChild(layer);
+Scene *GameManager::createScene() {
+  auto scene = Scene::create();
+  auto layer = GameManager::create();
+  scene->addChild(layer);
 
-    return scene;
+  return scene;
 }
 
-bool GameManager::init()
-{
-    if (!Layer::init()) {
-        return false;
-    }
+bool GameManager::init() {
+  if (!Layer::init()) {
+    return false;
+  }
 
-    // Touchアクションのイベントリスナー
-    auto listener = EventListenerTouchOneByOne::create();
+  loadCards();
 
-    // タッチ開始時の処理
-    listener->onTouchBegan = [this](Touch* touch, Event* event) {
-        CCLOG("TouchBegan");
+  // Touchアクションのイベントリスナー
+  auto listener = EventListenerTouchOneByOne::create();
 
-        return true;
-    };
-
-    // タッチイベントの登録
-    Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this);
+  // タッチ開始時の処理
+  listener->onTouchBegan = [this](Touch *touch, Event *event) {
+    CCLOG("TouchBegan");
 
     return true;
+  };
+
+  // タッチイベントの登録
+  Director::getInstance()
+      ->getEventDispatcher()
+      ->addEventListenerWithSceneGraphPriority(listener, this);
+
+  return true;
 }
 
 // カードをロードする関数
-void GameManager::loadCards()
-{
+void GameManager::loadCards() {
+  for (int i = 1; i <= MAX_CARD_NUMBER; i++) {
+
+    // ハート柄のカードをロードする
+    auto heart = Sprite::create(StringUtils::format("h%d.png", i));
+    heart->setAnchorPoint(Vec2::ANCHOR_BOTTOM_LEFT);
+    addChild(heart);
+
+    // ダイヤ柄のカードをロードする
+    auto diamond = Sprite::create(StringUtils::format("d%d.png", i));
+    diamond->setAnchorPoint(Vec2::ANCHOR_BOTTOM_LEFT);
+    addChild(diamond);
+  }
 }
 
 // カードを配置する関数
-void GameManager::arrangeCards()
-{
-}
+void GameManager::arrangeCards() {}
