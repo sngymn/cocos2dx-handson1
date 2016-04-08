@@ -5,21 +5,23 @@
 
 class GameManager : public cocos2d::Layer {
 
-    static constexpr int MAX_CARD_NUMBER = 9;
-    static constexpr int MAX_CARD_ROWS = 6;
-    static constexpr int MAX_CARD_COLS = 3;
+  static constexpr int MAX_CARD_NUMBER = 9;
+  static constexpr int MAX_CARD_ROWS = 6;
+  static constexpr int MAX_CARD_COLS = 3;
 
 public:
-    static cocos2d::Scene* createScene();
+  static cocos2d::Scene *createScene();
 
-    bool init() override;
+  bool init() override;
 
-    void loadCards();
-    void arrangeCards();
+  void loadCards();
+  void arrangeCards();
 
-    CREATE_FUNC(GameManager);
+  CREATE_FUNC(GameManager);
 
 private:
+  // 動的配列を宣言する
+  cocos2d::Vector<cocos2d::Sprite *> cards{};
 };
 
 #endif // __HELLOWORLD_SCENE_H__

@@ -44,10 +44,16 @@ void GameManager::loadCards() {
     heart->setAnchorPoint(Vec2::ANCHOR_BOTTOM_LEFT);
     addChild(heart);
 
+    // 動的配列へ追加
+    cards.pushBack(heart);
+
     // ダイヤ柄のカードをロードする
     auto diamond = Sprite::create(StringUtils::format("d%d.png", i));
     diamond->setAnchorPoint(Vec2::ANCHOR_BOTTOM_LEFT);
     addChild(diamond);
+
+    // 動的配列へ追加
+    cards.pushBack(diamond);
   }
 }
 
