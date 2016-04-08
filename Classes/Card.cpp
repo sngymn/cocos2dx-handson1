@@ -70,6 +70,16 @@ void Card::invisible() {
   backSprite->setVisible(false);
 }
 
+// タッチ位置がカード内に存在するか判定する
+bool Card::inside(const cocos2d::Vec2 &loc) const
+{
+  auto position = getPosition();
+  auto contentSize = frontSprite->getContentSize();
+  Rect rect(position, contentSize);
+    
+  return rect.containsPoint(loc);
+}
+
 // カードがオープン状態か判定する
 bool Card::isOpen() const { return bOpen; }
 

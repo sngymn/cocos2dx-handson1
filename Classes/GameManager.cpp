@@ -24,6 +24,8 @@ bool GameManager::init() {
   // タッチ開始時の処理
   listener->onTouchBegan = [this](Touch *touch, Event *event) {
     CCLOG("TouchBegan");
+      
+    auto loc = touch->getLocation();
 
     return true;
   };
