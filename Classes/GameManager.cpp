@@ -132,6 +132,9 @@ void GameManager::loadCards() {
 
 // カードを配置する関数
 void GameManager::arrangeCards() {
+  // カードのシャッフル(簡易版)
+  std::shuffle(cards.begin(), cards.end(), std::mt19937());
+    
   const Size windowSize = Director::getInstance()->getWinSize();
   const Size cardSize = cards.back()->getCardSize(); // カードサイズは全て同じ
   const Size margin((windowSize.width - cardSize.width * MAX_CARD_ROWS) / (MAX_CARD_ROWS + 1),
