@@ -17,6 +17,7 @@ public:
 
     void visible();
     void invisible();
+    bool inside(const cocos2d::Vec2& loc) const; // カード内へのタッチを判定する　
     bool isOpen() const;
 
     uint8_t getCardNumber() const;
